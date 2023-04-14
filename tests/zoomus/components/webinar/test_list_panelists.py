@@ -24,7 +24,7 @@ class ListPanelistsV2TestCase(unittest.TestCase):
         self.component.list_panelists(id="42")
 
     def test_requires_id(self):
-        with self.assertRaisesRegexp(ValueError, "'id' must be set"):
+        with self.assertRaisesRegex(ValueError, "'id' must be set"):
             self.component.list_panelists()
 
 

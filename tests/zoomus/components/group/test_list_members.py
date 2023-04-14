@@ -33,7 +33,7 @@ class MembersV2TestCase(unittest.TestCase):
         )
 
     def test_requires_group_id(self):
-        with self.assertRaisesRegexp(ValueError, "'groupid' must be set"):
+        with self.assertRaisesRegex(ValueError, "'groupid' must be set"):
             self.component.list_members()
 
 

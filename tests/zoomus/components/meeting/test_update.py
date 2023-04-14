@@ -33,11 +33,11 @@ class UpdateV1TestCase(unittest.TestCase):
         self.component.update(id="ID", host_id="ID")
 
     def test_requires_id(self):
-        with self.assertRaisesRegexp(ValueError, "'id' must be set"):
+        with self.assertRaisesRegex(ValueError, "'id' must be set"):
             self.component.update()
 
     def test_requires_host_id(self):
-        with self.assertRaisesRegexp(ValueError, "'host_id' must be set"):
+        with self.assertRaisesRegex(ValueError, "'host_id' must be set"):
             self.component.update(id="ID")
 
     @responses.activate
@@ -69,7 +69,7 @@ class UpdateV2TestCase(unittest.TestCase):
         self.assertEqual(response.request.body, '{"id": "42", "foo": "bar"}')
 
     def test_requires_id(self):
-        with self.assertRaisesRegexp(ValueError, "'id' must be set"):
+        with self.assertRaisesRegex(ValueError, "'id' must be set"):
             self.component.update()
 
     @responses.activate

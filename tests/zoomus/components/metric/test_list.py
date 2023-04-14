@@ -40,11 +40,11 @@ class ListV2TestCase(unittest.TestCase):
         self.component.list_participants_qos(meeting_id="ID")
 
     def test_list_participants_requires_meeting_id(self):
-        with self.assertRaisesRegexp(ValueError, "'meeting_id' must be set"):
+        with self.assertRaisesRegex(ValueError, "'meeting_id' must be set"):
             self.component.list_participants()
 
     def test_list_participants_qos_requires_meeting_id(self):
-        with self.assertRaisesRegexp(ValueError, "'meeting_id' must be set"):
+        with self.assertRaisesRegex(ValueError, "'meeting_id' must be set"):
             self.component.list_participants_qos()
 
 

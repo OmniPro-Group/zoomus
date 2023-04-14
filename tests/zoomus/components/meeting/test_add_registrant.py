@@ -38,7 +38,7 @@ class AddRegistrantV2TestCase(unittest.TestCase):
         )
 
     def test_requires_meeting_id(self):
-        with self.assertRaisesRegexp(ValueError, "'id' must be set"):
+        with self.assertRaisesRegex(ValueError, "'id' must be set"):
             self.component.add_registrant()
 
 

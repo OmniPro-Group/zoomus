@@ -36,11 +36,11 @@ class GetUserReportV1TestCase(unittest.TestCase):
         self.component.get_user_report(start_time=start_time, end_time=end_time)
 
     def test_requires_start_time(self):
-        with self.assertRaisesRegexp(ValueError, "'start_time' must be set"):
+        with self.assertRaisesRegex(ValueError, "'start_time' must be set"):
             self.component.get_user_report()
 
     def test_requires_end_time(self):
-        with self.assertRaisesRegexp(ValueError, "'end_time' must be set"):
+        with self.assertRaisesRegex(ValueError, "'end_time' must be set"):
             self.component.get_user_report(start_time=datetime.datetime.utcnow())
 
 
@@ -69,15 +69,15 @@ class GetUserReportV2TestCase(unittest.TestCase):
         )
 
     def test_requires_user_id(self):
-        with self.assertRaisesRegexp(ValueError, "'user_id' must be set"):
+        with self.assertRaisesRegex(ValueError, "'user_id' must be set"):
             self.component.get_user_report()
 
     def test_requires_start_time(self):
-        with self.assertRaisesRegexp(ValueError, "'start_time' must be set"):
+        with self.assertRaisesRegex(ValueError, "'start_time' must be set"):
             self.component.get_user_report(user_id="ID")
 
     def test_requires_end_time(self):
-        with self.assertRaisesRegexp(ValueError, "'end_time' must be set"):
+        with self.assertRaisesRegex(ValueError, "'end_time' must be set"):
             self.component.get_user_report(
                 user_id="ID", start_time=datetime.datetime.utcnow()
             )

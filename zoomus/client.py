@@ -44,8 +44,9 @@ class ZoomClient(util.ApiClient):
 
     def __init__(
         self,
-        api_key,
-        api_secret,
+        client_id,
+        client_secret,
+        account_id,
         data_type="json",
         timeout=15,
         version=API_VERSION_2,
@@ -53,8 +54,9 @@ class ZoomClient(util.ApiClient):
     ):
         """Create a new Zoom client
 
-        :param api_key: The Zooom.us API key
-        :param api_secret: The Zoom.us API secret
+        :param client_id: The Zooom.us API Server-to-Server OAuth client id
+        :param client_secret: The Zoom.us API Server-to-Server OAuth client secret
+        :param account_id: The Zoom.us account id
         :param data_type: The expected return data type. Either 'json' or 'xml'
         :param timeout: The time out to use for API requests
         :param version: The API version to use (Default is V2). The available
@@ -75,12 +77,13 @@ class ZoomClient(util.ApiClient):
 
         # Setup the config details
         self.config = {
-            "api_key": api_key,
-            "api_secret": api_secret,
+            "client_id": client_id,
+            "client_secret": client_secret,
+            "account_id": account_id,
             "data_type": data_type,
             "version": version,
             "base_uri": base_uri,
-            "token": util.generate_jwt(api_key, api_secret),
+            "token": util.generate_jwt(client_id, client_secret, account_id),
         }
 
         # Instantiate the components
@@ -97,29 +100,40 @@ class ZoomClient(util.ApiClient):
 
     def refresh_token(self):
         self.config["token"] = (
-            util.generate_jwt(self.config["api_key"], self.config["api_secret"]),
+            util.generate_jwt(self.config["client_id"], self.config["client_secret"], self.config["account_id"]),
         )
 
     @property
-    def api_key(self):
-        """The Zoom.us api_key"""
-        return self.config.get("api_key")
+    def client_id(self):
+        """The Zoom.us client_id"""
+        return self.config.get("client_id")
 
-    @api_key.setter
-    def api_key(self, value):
-        """Set the api_key"""
-        self.config["api_key"] = value
+    @client_id.setter
+    def client_id(self, value):
+        """Set the client_id"""
+        self.config["client_id"] = value
         self.refresh_token()
 
     @property
-    def api_secret(self):
-        """The Zoom.us api_secret"""
-        return self.config.get("api_secret")
+    def client_secret(self):
+        """The Zoom.us client_secret"""
+        return self.config.get("client_secret")
 
-    @api_secret.setter
-    def api_secret(self, value):
-        """Set the api_secret"""
-        self.config["api_secret"] = value
+    @client_secret.setter
+    def client_secret(self, value):
+        """Set the client_secret"""
+        self.config["client_secret"] = value
+        self.refresh_token()
+
+    @property
+    def account_id(self):
+        """The Zoom.us account_id"""
+        return self.config.get("account_id")
+
+    @account_id.setter
+    def account_id(self, value):
+        """Set the account_id"""
+        self.config["account_id"] = value
         self.refresh_token()
 
     @property

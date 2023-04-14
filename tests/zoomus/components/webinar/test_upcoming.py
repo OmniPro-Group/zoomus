@@ -32,7 +32,7 @@ class UpcomingV1TestCase(unittest.TestCase):
         self.component.upcoming(host_id="ID")
 
     def test_requires_host_id(self):
-        with self.assertRaisesRegexp(ValueError, "'host_id' must be set"):
+        with self.assertRaisesRegex(ValueError, "'host_id' must be set"):
             self.component.upcoming()
 
     @responses.activate

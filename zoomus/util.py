@@ -7,8 +7,7 @@ from urllib.parse import quote
 import contextlib
 import json
 import requests
-import time
-import jwt
+import base64
 
 API_VERSION_1 = 1
 API_VERSION_2 = 2
@@ -259,12 +258,21 @@ def date_to_str(d):
     return d.strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
-def generate_jwt(key, secret):
-    header = {"alg": "HS256", "typ": "JWT"}
+def generate_jwt(client_id, client_secret, account):
+    base64_auth_string = base64.b64encode(f"{client_id}:{client_secret}".encode("ascii")).decode("ascii")
 
-    payload = {"iss": key, "exp": int(time.time() + 3600)}
+    url = "https://zoom.us/oauth/token"
+    payload = {
+        "grant_type": "account_credentials",
+        "account_id": account,
+    }
 
-    token = jwt.encode(payload, secret, algorithm="HS256", headers=header)
+    headers = {
+        "Authorization": f"Basic {base64_auth_string}",
+    }
+
+    response = requests.post(url, data=payload, headers=headers)
+    token = response.json().get('access_token')
     return token
 
 

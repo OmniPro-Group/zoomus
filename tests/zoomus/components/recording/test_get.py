@@ -32,7 +32,7 @@ class GetV1TestCase(unittest.TestCase):
         self.component.get(meeting_id="ID")
 
     def test_requires_id(self):
-        with self.assertRaisesRegexp(ValueError, "'meeting_id' must be set"):
+        with self.assertRaisesRegex(ValueError, "'meeting_id' must be set"):
             self.component.get()
 
 
@@ -55,7 +55,7 @@ class GetV2TestCase(unittest.TestCase):
         self.component.get(meeting_id="42")
 
     def test_requires_id(self):
-        with self.assertRaisesRegexp(ValueError, "'meeting_id' must be set"):
+        with self.assertRaisesRegex(ValueError, "'meeting_id' must be set"):
             self.component.get()
 
 

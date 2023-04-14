@@ -38,15 +38,15 @@ class UpdateRegistrantStatusV2TestCase(unittest.TestCase):
         )
 
     def test_requires_meeting_id(self):
-        with self.assertRaisesRegexp(ValueError, "'id' must be set"):
+        with self.assertRaisesRegex(ValueError, "'id' must be set"):
             self.component.update_registrant_status()
 
     def test_requires_action(self):
-        with self.assertRaisesRegexp(ValueError, "'action' must be set"):
+        with self.assertRaisesRegex(ValueError, "'action' must be set"):
             self.component.update_registrant_status(id="ID")
 
     def test_requires_registrants(self):
-        with self.assertRaisesRegexp(ValueError, "'registrants' must be set"):
+        with self.assertRaisesRegex(ValueError, "'registrants' must be set"):
             self.component.update_registrant_status(id="ID", action="approve")
 
 

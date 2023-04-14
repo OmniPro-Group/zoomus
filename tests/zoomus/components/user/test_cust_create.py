@@ -31,11 +31,11 @@ class CustCreateV1TestCase(unittest.TestCase):
         self.component.cust_create(type="foo", email="a@b.com")
 
     def test_requires_type(self):
-        with self.assertRaisesRegexp(ValueError, "'type' must be set"):
+        with self.assertRaisesRegex(ValueError, "'type' must be set"):
             self.component.cust_create()
 
     def test_requires_email(self):
-        with self.assertRaisesRegexp(ValueError, "'email' must be set"):
+        with self.assertRaisesRegex(ValueError, "'email' must be set"):
             self.component.cust_create(type="foo")
 
 
