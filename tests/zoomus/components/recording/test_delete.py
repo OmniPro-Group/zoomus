@@ -32,7 +32,7 @@ class DeleteV1TestCase(unittest.TestCase):
         self.component.delete(meeting_id="ID")
 
     def test_requires_id(self):
-        with self.assertRaisesRegexp(ValueError, "'meeting_id' must be set"):
+        with self.assertRaisesRegex(ValueError, "'meeting_id' must be set"):
             self.component.delete()
 
 
@@ -55,7 +55,7 @@ class DeleteV2TestCase(unittest.TestCase):
         self.component.delete(meeting_id="42")
 
     def test_requires_id(self):
-        with self.assertRaisesRegexp(ValueError, "'meeting_id' must be set"):
+        with self.assertRaisesRegex(ValueError, "'meeting_id' must be set"):
             self.component.delete()
 
 
@@ -79,7 +79,7 @@ class DeleteSingleRecordingV2TestCase(unittest.TestCase):
         self.component.delete_single_recording(meeting_id="42", recording_id="abc-bca")
 
     def test_requires_id(self):
-        with self.assertRaisesRegexp(ValueError, "'recording_id' must be set"):
+        with self.assertRaisesRegex(ValueError, "'recording_id' must be set"):
             self.component.delete_single_recording(meeting_id="42")
 
 

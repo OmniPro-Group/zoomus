@@ -27,7 +27,7 @@ class GetDevicesV2TestCase(unittest.TestCase):
         self.component.get_devices(id="42")
 
     def test_requires_room_id(self):
-        with self.assertRaisesRegexp(ValueError, "'id' must be set"):
+        with self.assertRaisesRegex(ValueError, "'id' must be set"):
             self.component.get()
 
 

@@ -29,11 +29,11 @@ class DeleteMemberV2TestCase(unittest.TestCase):
         self.component.delete_member(groupid="42", memberid="13")
 
     def test_requires_groupid(self):
-        with self.assertRaisesRegexp(ValueError, "'groupid' must be set"):
+        with self.assertRaisesRegex(ValueError, "'groupid' must be set"):
             self.component.delete_member()
 
     def test_requires_memberid(self):
-        with self.assertRaisesRegexp(ValueError, "'memberid' must be set"):
+        with self.assertRaisesRegex(ValueError, "'memberid' must be set"):
             self.component.delete_member(groupid="foo")
 
 

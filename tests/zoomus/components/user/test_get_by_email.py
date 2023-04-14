@@ -31,11 +31,11 @@ class GetByEmailV1TestCase(unittest.TestCase):
         self.component.get_by_email(email="a@b.com", login_type="foo")
 
     def test_requires_email(self):
-        with self.assertRaisesRegexp(ValueError, "'email' must be set"):
+        with self.assertRaisesRegex(ValueError, "'email' must be set"):
             self.component.get_by_email()
 
     def test_requires_login_type(self):
-        with self.assertRaisesRegexp(ValueError, "'login_type' must be set"):
+        with self.assertRaisesRegex(ValueError, "'login_type' must be set"):
             self.component.get_by_email(email="a@b.com")
 
 

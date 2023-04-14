@@ -33,7 +33,7 @@ class ListV1TestCase(unittest.TestCase):
         self.component.list(host_id="ID")
 
     def test_requires_host_id(self):
-        with self.assertRaisesRegexp(ValueError, "'host_id' must be set"):
+        with self.assertRaisesRegex(ValueError, "'host_id' must be set"):
             self.component.list()
 
     @responses.activate
@@ -66,7 +66,7 @@ class ListV2TestCase(unittest.TestCase):
         self.component.list(user_id="42")
 
     def test_requires_user_id(self):
-        with self.assertRaisesRegexp(ValueError, "'user_id' must be set"):
+        with self.assertRaisesRegex(ValueError, "'user_id' must be set"):
             self.component.list()
 
 

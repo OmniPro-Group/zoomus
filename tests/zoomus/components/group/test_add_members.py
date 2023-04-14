@@ -31,9 +31,9 @@ class AddMemberV2TestCase(unittest.TestCase):
         )
 
     def test_requires_groupid(self):
-        with self.assertRaisesRegexp(ValueError, "'groupid' must be set"):
+        with self.assertRaisesRegex(ValueError, "'groupid' must be set"):
             self.component.add_members()
 
     def test_requires_members(self):
-        with self.assertRaisesRegexp(ValueError, "'members' must be set"):
+        with self.assertRaisesRegex(ValueError, "'members' must be set"):
             self.component.add_members(groupid="foo")

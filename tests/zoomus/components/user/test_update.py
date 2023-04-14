@@ -32,7 +32,7 @@ class UpdateV1TestCase(unittest.TestCase):
         self.component.update(id="42")
 
     def test_requires_id(self):
-        with self.assertRaisesRegexp(ValueError, "'id' must be set"):
+        with self.assertRaisesRegex(ValueError, "'id' must be set"):
             self.component.update()
 
 
@@ -54,7 +54,7 @@ class UpdateV2TestCase(unittest.TestCase):
         self.assertEqual(response.request.body, '{"id": "42"}')
 
     def test_requires_id(self):
-        with self.assertRaisesRegexp(ValueError, "'id' must be set"):
+        with self.assertRaisesRegex(ValueError, "'id' must be set"):
             self.component.update()
 
 

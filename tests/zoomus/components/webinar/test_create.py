@@ -33,11 +33,11 @@ class CreateV1TestCase(unittest.TestCase):
         self.component.create(host_id="ID", topic="TOPIC")
 
     def test_requires_host_id(self):
-        with self.assertRaisesRegexp(ValueError, "'host_id' must be set"):
+        with self.assertRaisesRegex(ValueError, "'host_id' must be set"):
             self.component.create()
 
     def test_requires_topic(self):
-        with self.assertRaisesRegexp(ValueError, "'topic' must be set"):
+        with self.assertRaisesRegex(ValueError, "'topic' must be set"):
             self.component.create(host_id="ID")
 
     @responses.activate
@@ -69,7 +69,7 @@ class CreateV2TestCase(unittest.TestCase):
         self.assertEqual(response.request.body, '{"user_id": "42"}')
 
     def test_requires_user_id(self):
-        with self.assertRaisesRegexp(ValueError, "'user_id' must be set"):
+        with self.assertRaisesRegex(ValueError, "'user_id' must be set"):
             self.component.create()
 
 

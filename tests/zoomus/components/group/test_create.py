@@ -30,7 +30,7 @@ class CreateV2TestCase(unittest.TestCase):
         self.assertEqual(response.request.body, '{"name": "bar"}')
 
     def test_requires_name(self):
-        with self.assertRaisesRegexp(ValueError, "'name' must be set"):
+        with self.assertRaisesRegex(ValueError, "'name' must be set"):
             self.component.create()
 
 

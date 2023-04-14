@@ -36,19 +36,19 @@ class RegisterV1TestCase(unittest.TestCase):
         )
 
     def test_requires_id(self):
-        with self.assertRaisesRegexp(ValueError, "'id' must be set"):
+        with self.assertRaisesRegex(ValueError, "'id' must be set"):
             self.component.register()
 
     def test_requires_email(self):
-        with self.assertRaisesRegexp(ValueError, "'email' must be set"):
+        with self.assertRaisesRegex(ValueError, "'email' must be set"):
             self.component.register(id="ID")
 
     def test_requires_first_name(self):
-        with self.assertRaisesRegexp(ValueError, "'first_name' must be set"):
+        with self.assertRaisesRegex(ValueError, "'first_name' must be set"):
             self.component.register(id="ID", email="foo@bar.com")
 
     def test_requires_last_name(self):
-        with self.assertRaisesRegexp(ValueError, "'last_name' must be set"):
+        with self.assertRaisesRegex(ValueError, "'last_name' must be set"):
             self.component.register(id="ID", email="foo@bar.com", first_name="foo")
 
     @responses.activate
@@ -94,19 +94,19 @@ class RegisterV2TestCase(unittest.TestCase):
         )
 
     def test_requires_id(self):
-        with self.assertRaisesRegexp(ValueError, "'id' must be set"):
+        with self.assertRaisesRegex(ValueError, "'id' must be set"):
             self.component.register()
 
     def test_requires_email(self):
-        with self.assertRaisesRegexp(ValueError, "'email' must be set"):
+        with self.assertRaisesRegex(ValueError, "'email' must be set"):
             self.component.register(id="ID")
 
     def test_requires_first_name(self):
-        with self.assertRaisesRegexp(ValueError, "'first_name' must be set"):
+        with self.assertRaisesRegex(ValueError, "'first_name' must be set"):
             self.component.register(id="ID", email="foo@bar.com")
 
     def test_requires_last_name(self):
-        with self.assertRaisesRegexp(ValueError, "'last_name' must be set"):
+        with self.assertRaisesRegex(ValueError, "'last_name' must be set"):
             self.component.register(id="ID", email="foo@bar.com", first_name="foo")
 
 

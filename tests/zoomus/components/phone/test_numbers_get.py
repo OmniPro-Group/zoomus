@@ -28,7 +28,7 @@ class NumbersGetV2TestCase(unittest.TestCase):
         self.component.numbers_get(id="ID")
 
     def test_requires_id(self):
-        with self.assertRaisesRegexp(ValueError, "'id' must be set"):
+        with self.assertRaisesRegex(ValueError, "'id' must be set"):
             self.component.numbers_get()
 
 

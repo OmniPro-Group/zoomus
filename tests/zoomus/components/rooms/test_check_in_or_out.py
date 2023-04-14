@@ -28,7 +28,7 @@ class CheckInOrOutV2TestCase(unittest.TestCase):
         self.assertEqual(response.request.body, '{"id": "42"}')
 
     def test_requires_room_id(self):
-        with self.assertRaisesRegexp(ValueError, "'id' must be set"):
+        with self.assertRaisesRegex(ValueError, "'id' must be set"):
             self.component.update()
 
 

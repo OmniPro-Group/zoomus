@@ -36,11 +36,11 @@ class GetAccountReportV1TestCase(unittest.TestCase):
         self.component.get_account_report(start_time=start_time, end_time=end_time)
 
     def test_requires_start_time(self):
-        with self.assertRaisesRegexp(ValueError, "'start_time' must be set"):
+        with self.assertRaisesRegex(ValueError, "'start_time' must be set"):
             self.component.get_account_report()
 
     def test_requires_end_time(self):
-        with self.assertRaisesRegexp(ValueError, "'end_time' must be set"):
+        with self.assertRaisesRegex(ValueError, "'end_time' must be set"):
             self.component.get_account_report(start_time=datetime.datetime.utcnow())
 
 
@@ -66,11 +66,11 @@ class GetAccountReportV2TestCase(unittest.TestCase):
         self.component.get_account_report(start_time=start_time, end_time=end_time)
 
     def test_requires_start_time(self):
-        with self.assertRaisesRegexp(ValueError, "'start_time' must be set"):
+        with self.assertRaisesRegex(ValueError, "'start_time' must be set"):
             self.component.get_account_report()
 
     def test_requires_end_time(self):
-        with self.assertRaisesRegexp(ValueError, "'end_time' must be set"):
+        with self.assertRaisesRegex(ValueError, "'end_time' must be set"):
             self.component.get_account_report(start_time=datetime.datetime.utcnow())
 
 

@@ -28,7 +28,7 @@ class CheckEmailV2TestCase(unittest.TestCase):
         self.component.check_email(email="foo@bar.test")
 
     def test_requires_email(self):
-        with self.assertRaisesRegexp(ValueError, "'id' must be set"):
+        with self.assertRaisesRegex(ValueError, "'id' must be set"):
             self.component.get()
 
 

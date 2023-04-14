@@ -29,11 +29,11 @@ class UpdateStatusV2TestCase(unittest.TestCase):
         self.assertEqual(response.request.body, '{"action": "activate"}')
 
     def test_requires_id(self):
-        with self.assertRaisesRegexp(ValueError, "'id' must be set"):
+        with self.assertRaisesRegex(ValueError, "'id' must be set"):
             self.component.update_status()
 
     def test_requires_action(self):
-        with self.assertRaisesRegexp(ValueError, "'action' must be set"):
+        with self.assertRaisesRegex(ValueError, "'action' must be set"):
             self.component.update_status(id="42")
 
 

@@ -31,11 +31,11 @@ class EndV1TestCase(unittest.TestCase):
         self.component.end(id="ID", host_id="ID")
 
     def test_requires_id(self):
-        with self.assertRaisesRegexp(ValueError, "'id' must be set"):
+        with self.assertRaisesRegex(ValueError, "'id' must be set"):
             self.component.end()
 
     def test_requires_host_id(self):
-        with self.assertRaisesRegexp(ValueError, "'host_id' must be set"):
+        with self.assertRaisesRegex(ValueError, "'host_id' must be set"):
             self.component.end(id="ID")
 
 

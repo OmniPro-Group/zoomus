@@ -29,11 +29,11 @@ class GetSettingsV2TestCase(unittest.TestCase):
         self.component.get_settings(id="42", setting_type="meeting")
 
     def test_requires_setting_type(self):
-        with self.assertRaisesRegexp(ValueError, "'setting_type' must be set"):
+        with self.assertRaisesRegex(ValueError, "'setting_type' must be set"):
             self.component.get_settings(id="42")
 
     def test_requires_room_id(self):
-        with self.assertRaisesRegexp(ValueError, "'id' must be set"):
+        with self.assertRaisesRegex(ValueError, "'id' must be set"):
             self.component.get_settings()
 
 

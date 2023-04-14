@@ -33,7 +33,7 @@ class ParticipantsV2TestCase(unittest.TestCase):
         )
 
     def test_requires_user_id(self):
-        with self.assertRaisesRegexp(ValueError, "'meeting_id' must be set"):
+        with self.assertRaisesRegex(ValueError, "'meeting_id' must be set"):
             self.component.get_participants()
 
 
