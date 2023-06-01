@@ -15,4 +15,5 @@ from . import (
     room,
     user,
     webinar,
+    events,
 )

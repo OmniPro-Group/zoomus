@@ -33,6 +33,7 @@ COMPONENT_CLASSES = {
         "room": components.room.RoomComponentV2,
         "user": components.user.UserComponentV2,
         "webinar": components.webinar.WebinarComponentV2,
+        "events": components.events.EventsComponentV2,
     },
 }
 
@@ -165,6 +166,11 @@ class ZoomClient(util.ApiClient):
     def webinar(self):
         """Get the webinar component"""
         return self.components.get("webinar")
+
+    @property
+    def events(self):
+        """Get the events component"""
+        return self.components.get("events")
 
     @property
     def recording(self):
