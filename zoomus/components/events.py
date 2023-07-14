@@ -424,3 +424,32 @@ class EventsComponentV2(base.BaseComponent):
             f"/zoom_events/events/{event_id}/tickets/{ticket_id}",
             params=kwargs
         )
+    
+    #
+    # Event Reports
+    #
+    def event_attendance(self, **kwargs):
+        """
+        Get event attendance report
+        GET /zoom_events/events/{eventId}/reports/event_attendance
+        Use this API to retrieve the attendance report of an event.
+        """
+        util.require_keys(kwargs, "event_id")
+        event_id = kwargs.get("event_id")
+        return self.get_request(
+            f"/zoom_events/events/{event_id}/reports/event_attendance",
+            params=kwargs
+        )
+    
+    def event_registrations(self, **kwargs):
+        """
+        Get event registrations report
+        GET /zoom_events/events/{eventId}/reports/ticket_registration
+        Use this API to retrieve the registrations report of an event.
+        """
+        util.require_keys(kwargs, "event_id")
+        event_id = kwargs.get("event_id")
+        return self.get_request(
+            f"/zoom_events/events/{event_id}/reports/ticket_registration",
+            params=kwargs
+        )

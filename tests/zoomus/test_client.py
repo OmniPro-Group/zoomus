@@ -53,6 +53,7 @@ class ZoomClientTestCase(unittest.TestCase):
             set(
                 [
                     "contacts",
+                    "events",
                     "group",
                     "live_stream",
                     "meeting",
@@ -70,6 +71,9 @@ class ZoomClientTestCase(unittest.TestCase):
         )
         self.assertIsInstance(
             client.components["contacts"], components.contacts.ContactsComponentV2
+        )
+        self.assertIsInstance(
+            client.components["events"], components.events.EventsComponentV2
         )
         self.assertIsInstance(
             client.components["meeting"], components.meeting.MeetingComponentV2
@@ -168,6 +172,10 @@ class ZoomClientTestCase(unittest.TestCase):
     def test_can_get_contacts_component(self):
         client = ZoomClient("KEY", "SECRET", "ACCOUNT")
         self.assertIsInstance(client.contacts, components.contacts.ContactsComponentV2)
+
+    def test_can_get_events_component(self):
+        client = ZoomClient("KEY", "SECRET", "ACCOUNT")
+        self.assertIsInstance(client.events, components.events.EventsComponentV2)    
 
     def test_can_get_meeting_component(self):
         client = ZoomClient("KEY", "SECRET", "ACCOUNT")
