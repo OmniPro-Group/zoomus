@@ -122,3 +122,4 @@ class WebinarComponentV2(base.BaseComponent):
         return self.delete_request(
             "/webinars/{}/panelists".format(kwargs.get("id")), params=kwargs
         )
+#to do
