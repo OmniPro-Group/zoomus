@@ -123,8 +123,9 @@ class WebinarComponentV2(base.BaseComponent):
             "/webinars/{}/panelists".format(kwargs.get("id")), params=kwargs
         )
     
-    def participants_report(self, webinar_id):
-        url = f'/report/webinars/{webinar_id}/participants'
+    def participants_report(self, **kwargs):
+        util.require_keys(kwargs, "id")
+        url = f'/report/webinars/{}/participants'.format(kwargs.get("id"))
         page_size = 300
         participant_report_response = self.get_request(
             url,
