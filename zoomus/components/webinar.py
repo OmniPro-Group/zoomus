@@ -3,7 +3,7 @@
 from __future__ import absolute_import
 
 import json
-import deepcopy
+from copy import deepcopy
 
 from zoomus import util
 from zoomus.components import base
