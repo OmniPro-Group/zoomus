@@ -2,6 +2,9 @@
 
 from __future__ import absolute_import
 
+import json
+import deepcopy
+
 from zoomus import util
 from zoomus.components import base
 
@@ -125,7 +128,7 @@ class WebinarComponentV2(base.BaseComponent):
     
     def participants_report(self, **kwargs):
         util.require_keys(kwargs, "id")
-        url = f'/report/webinars/{}/participants'.format(kwargs.get("id"))
+        url = "/report/webinars/{}/participants".format(kwargs.get("id"))
         page_size = 300
         participant_report_response = self.get_request(
             url,
@@ -133,8 +136,7 @@ class WebinarComponentV2(base.BaseComponent):
         )
 
         if participant_report_response.status_code >= 300:
-            self.log.error('Error retrieving webinar participant report')
-            raise ParticipantReportException('Error retrieving webinar participant report')
+            return None
 
         data = json.loads(participant_report_response.content)
         participants = deepcopy(data["participants"])
@@ -148,7 +150,7 @@ class WebinarComponentV2(base.BaseComponent):
                 }
             )
             if participant_report_response.status_code >= 300:
-                raise ParticipantReportException('Error retrieving webinar participant report')
+                return None
 
             data = json.loads(participant_report_response.content)
             participants.extend([w for w in deepcopy(data["participants"])])
