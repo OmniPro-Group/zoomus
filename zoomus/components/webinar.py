@@ -122,35 +122,3 @@ class WebinarComponentV2(base.BaseComponent):
         return self.delete_request(
             "/webinars/{}/panelists".format(kwargs.get("id")), params=kwargs
         )
-    
-    def participants_report(self, **kwargs):
-        util.require_keys(kwargs, "id")
-        url = f'/report/webinars/{}/participants'.format(kwargs.get("id"))
-        page_size = 300
-        participant_report_response = self.get_request(
-            url,
-            params={"page_size": page_size}
-        )
-
-        if participant_report_response.status_code >= 300:
-            self.log.error('Error retrieving webinar participant report')
-            raise ParticipantReportException('Error retrieving webinar participant report')
-
-        data = json.loads(participant_report_response.content)
-        participants = deepcopy(data["participants"])
-
-        while data["next_page_token"] != "":
-            participant_report_response = self.get_request(
-                url,
-                params={
-                    "page_size": page_size,
-                    "next_page_token": data["next_page_token"]
-                }
-            )
-            if participant_report_response.status_code >= 300:
-                raise ParticipantReportException('Error retrieving webinar participant report')
-
-            data = json.loads(participant_report_response.content)
-            participants.extend([w for w in deepcopy(data["participants"])])
-
-        return participants
