@@ -222,9 +222,9 @@ def validate_webhook(event: dict, secret: str, delta_mins: int = 20):
 
     signature = headers.get("x-zm-signature")
     timestamp = headers.get("x-zm-request-timestamp")
-    payload = event["body"]
+    payload = event.get("body")
 
-    if not timestamp or not timestamp_is_valid(timestamp, delta_mins=delta_mins):
+    if not payload or not signature or not timestamp or not timestamp_is_valid(timestamp, delta_mins=delta_mins):
         return False
 
     return contains_valid_signature(
