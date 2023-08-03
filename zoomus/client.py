@@ -224,8 +224,17 @@ def validate_webhook(event: dict, secret: str, delta_mins: int = 20):
     timestamp = headers.get("x-zm-request-timestamp")
     payload = event.get("body")
 
-    if not payload or not signature or not timestamp or not timestamp_is_valid(timestamp, delta_mins=delta_mins):
-        return False
+    if payload and payload["event"] == "endpoint.url_validation":
+        hash_for_validate = webhook_validation(payload["payload"]["plainToken"], secret)
+
+        response = {
+            "plainToken": payload["payload"]["plainToken"],
+            "encryptedToken": hash_for_validate
+        }
+        return None, 200, response
+
+    if not signature or not timestamp or not timestamp_is_valid(timestamp, delta_mins=delta_mins):
+        return False, None, None
 
     valid = contains_valid_signature(
         payload=payload,
@@ -234,13 +243,4 @@ def validate_webhook(event: dict, secret: str, delta_mins: int = 20):
         secret=secret
     )
 
-    if payload["event"] == "endpoint.url_validation":
-        hash_for_validate = webhook_validation(payload["payload"]["plainToken"], secret)
-
-        response = {
-            "plainToken": payload["payload"]["plainToken"],
-            "encryptedToken": hash_for_validate
-        }
-        return None, 200, response
-    else:
-        return valid, None, None
+    return valid, None, None
