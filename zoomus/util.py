@@ -318,3 +318,14 @@ def contains_valid_signature(payload, timestamp, signature, secret):
         return True
 
     return False
+
+
+def webhook_validation(plain_token, secret):
+    """
+    https://developers.zoom.us/docs/api/rest/webhook-reference/#validate-your-webhook-endpoint
+    """
+    hexdigest = hmac.new(
+        key=secret.encode("utf-8"), msg=plain_token.encode("utf-8"), digestmod=hashlib.sha256
+    ).hexdigest()
+
+    return hexdigest
