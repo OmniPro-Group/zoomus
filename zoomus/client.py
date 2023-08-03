@@ -3,8 +3,7 @@
 from __future__ import absolute_import, unicode_literals
 
 from zoomus import components, util
-from zoomus.util import API_VERSION_1, API_VERSION_2, API_GDPR
-
+from zoomus.util import API_VERSION_1, API_VERSION_2, API_GDPR, timestamp_is_valid, contains_valid_signature
 
 API_BASE_URIS = {
     API_VERSION_1: "https://api.zoom.us/v1",
@@ -201,3 +200,36 @@ class ZoomClient(util.ApiClient):
     def room(self):
         """Get the room component"""
         return self.components.get("room")
+
+
+def validate_webhook(event: dict, secret: str, delta_mins: int = 20):
+    """
+    https://developers.zoom.us/docs/api/rest/webhook-reference/
+
+    event = {
+        "headers": {
+            "x-zm-signature": str,
+            "x-zm-request-timestamp": str,
+        },
+        "body": {
+            "event": str,
+            "payload": dict,
+            "event_ts": int
+        }
+    }
+    """
+    headers = event.get("headers", {})
+
+    signature = headers.get("x-zm-signature")
+    timestamp = headers.get("x-zm-request-timestamp")
+    payload = event["body"]
+
+    if not timestamp or not timestamp_is_valid(timestamp, delta_mins=delta_mins):
+        return False
+
+    return contains_valid_signature(
+        payload=payload,
+        timestamp=timestamp,
+        signature=signature,
+        secret=secret
+    )

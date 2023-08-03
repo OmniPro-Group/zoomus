@@ -8,6 +8,9 @@ import contextlib
 import json
 import requests
 import base64
+from datetime import datetime, timedelta
+import hmac
+import hashlib
 
 API_VERSION_1 = 1
 API_VERSION_2 = 2
@@ -288,3 +291,30 @@ def encode_uuid(val):
     if val[0] == "/" or "//" in val:
         val = quote(quote(val, safe=""), safe="")
     return val
+
+
+def timestamp_is_valid(timestamp, delta_mins=5):
+    current_time = datetime.today()
+    sanity_timestamp = datetime.fromtimestamp(int(timestamp)/1000)
+
+    diff = current_time - sanity_timestamp
+
+    return diff < timedelta(minutes=delta_mins)
+
+
+def contains_valid_signature(payload, timestamp, signature, secret):
+    """
+    https://developers.zoom.us/docs/api/rest/webhook-reference/
+    """
+    version = "v0"
+    payload_str = json.dumps(payload, separators=(",", ":"))
+    message = f"{version}:{timestamp}:{payload_str}"
+
+    hexdigest = hmac.new(
+        key=secret.encode("utf-8"), msg=message.encode("utf-8"), digestmod=hashlib.sha256
+    ).hexdigest()
+
+    if hmac.compare_digest(signature, f"{version}={hexdigest}"):
+        return True
+
+    return False
