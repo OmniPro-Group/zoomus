@@ -3,7 +3,7 @@
 from __future__ import absolute_import, unicode_literals
 
 from zoomus import components, util
-from zoomus.util import API_VERSION_1, API_VERSION_2, API_GDPR, timestamp_is_valid, contains_valid_signature
+from zoomus.util import API_VERSION_1, API_VERSION_2, API_GDPR, timestamp_is_valid, contains_valid_signature, webhook_validation
 
 API_BASE_URIS = {
     API_VERSION_1: "https://api.zoom.us/v1",
@@ -227,9 +227,20 @@ def validate_webhook(event: dict, secret: str, delta_mins: int = 20):
     if not payload or not signature or not timestamp or not timestamp_is_valid(timestamp, delta_mins=delta_mins):
         return False
 
-    return contains_valid_signature(
+    valid = contains_valid_signature(
         payload=payload,
         timestamp=timestamp,
         signature=signature,
         secret=secret
     )
+
+    if payload["event"] == "endpoint.url_validation":
+        hash_for_validate = webhook_validation(payload["payload"]["plainToken"], secret)
+
+        response = {
+            "plainToken": payload["payload"]["plainToken"],
+            "encryptedToken": hash_for_validate
+        }
+        return None, 200, response
+    else:
+        return valid, None, None
