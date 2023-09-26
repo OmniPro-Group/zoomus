@@ -75,7 +75,7 @@ class EventsComponentV2(base.BaseComponent):
 
         event_id = kwargs.get("event_id")
 
-        return self.ptach_request(
+        return self.patch_request(
             f"/zoom_events/events/{event_id}",
             params=kwargs
         )
@@ -424,7 +424,7 @@ class EventsComponentV2(base.BaseComponent):
             f"/zoom_events/events/{event_id}/tickets/{ticket_id}",
             params=kwargs
         )
-    
+
     #
     # Event Reports
     #
@@ -440,7 +440,7 @@ class EventsComponentV2(base.BaseComponent):
             f"/zoom_events/events/{event_id}/reports/event_attendance",
             params=kwargs
         )
-    
+
     def event_registrations(self, **kwargs):
         """
         Get event registrations report
