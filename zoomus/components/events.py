@@ -77,7 +77,7 @@ class EventsComponentV2(base.BaseComponent):
 
         return self.patch_request(
             f"/zoom_events/events/{event_id}",
-            params=kwargs
+            data=kwargs
         )
 
     #
@@ -207,7 +207,7 @@ class EventsComponentV2(base.BaseComponent):
 
         return self.patch_request(
             f"/zoom_events/events/{event_id}/sessions/{session_id}",
-            params=kwargs
+            data=kwargs
         )
 
     def get_ticket_session_join_token(self, **kwargs):
@@ -319,7 +319,7 @@ class EventsComponentV2(base.BaseComponent):
 
         return self.patch_request(
             f"/zoom_events/events/{event_id}/ticket_types/{ticket_type_id}",
-            params=kwargs
+            data=kwargs
         )
 
     def list_registration_questions(self, **kwargs):
