@@ -259,6 +259,87 @@ class EventsComponentV2(base.BaseComponent):
         pass
 
     #
+    # Speakers
+    #
+
+    def list_speakers(self, **kwargs):
+        """
+        List speakers
+        GET /zoom_events/events/{eventId}/speakers
+        Use this API to retrieve speakers in an event.
+        """
+        util.require_keys(kwargs, "event_id")
+
+        event_id = kwargs.get("event_id")
+
+        return self.get_request(
+            f"/zoom_events/events/{event_id}/speakers",
+            params=kwargs
+        )
+
+    def create_speaker(self, **kwargs):
+        """
+        Create a speaker
+        POST /zoom_events/events/{eventId}/speakers
+        Use this API to create a speaker.
+        """
+        util.require_keys(kwargs, "event_id")
+
+        event_id = kwargs.get("event_id")
+        return self.post_request(
+            f"/zoom_events/events/{event_id}/speakers",
+            data=kwargs
+        )
+
+    def get_speaker(self, **kwargs):
+        """
+        Get the speaker information
+        GET /zoom_events/events/{eventId}/speakers/{speakerId}
+        Use this API to get the speaker information.
+        """
+        util.require_keys(kwargs, ["event_id", "speaker_id"])
+
+        event_id = kwargs.get("event_id")
+        speaker_id = kwargs.get("speaker_id")
+
+        return self.get_request(
+            f"/zoom_events/events/{event_id}/speakers/{speaker_id}",
+            params=kwargs
+        )
+
+    def delete_speaker(self, **kwargs):
+        """
+        Delete a speaker
+        DELETE /zoom_events/events/{eventId}/speakers/{speakerId}
+        Use this API to delete a speaker.
+        """
+        util.require_keys(kwargs, ["event_id", "speaker_id"])
+
+        event_id = kwargs.get("event_id")
+        speaker_id = kwargs.get("speaker_id")
+
+        return self.delete_request(
+            f"/zoom_events/events/{event_id}/speakers/{speaker_id}",
+            params=kwargs
+        )
+
+    def update_speaker(self, **kwargs):
+        """
+        Update a speaker
+        PATCH /zoom_events/events/{eventId}/speakers/{speakerId}
+        Use this API to update an existing speaker in an event.
+        """
+        util.require_keys(kwargs, ["event_id", "speaker_id"])
+
+        event_id = kwargs.get("event_id")
+        speaker_id = kwargs.get("speaker_id")
+
+        return self.patch_request(
+            f"/zoom_events/events/{event_id}/speakers/{speaker_id}",
+            data=kwargs
+        )
+
+    #
     # Ticket Types
     #
     def list_ticket_types(self, **kwargs):
